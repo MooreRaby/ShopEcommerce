@@ -1,146 +1,121 @@
 'use strict';
 
 const USER = require('../models/user.model');
-const { createUser } = require('../models/repositories/user.repo');
-const { BadRequestError, ErrorResponse } = require('../core/error.response');
+const { createUser, updateUser } = require('../models/repositories/user.repo');
+const { BadRequestError, ErrorResponse, AuthFailureError } = require('../core/error.response');
 const { sendEmailToken } = require('./email.service');
 const { checkEmailToken } = require('./otp.service');
-const KeyTokenService = require('./keyToken.service');
-const { createTokenPair, verifyJWT, generateKeyPair } = require("../auth/authUtils");
+const { createTokenPair, generateKeyPair } = require("../auth/authUtils");
 const bcrypt = require('bcrypt');
-const { getInfoData, convertToObjectIdMongodb } = require('../utils');
+const { getInfoData } = require('../utils');
 const { findRoleByName } = require('../models/repositories/role.repo');
 const { getRedis } = require('../dbs/init.redis'); // Import getRedis
+const userModel = require('../models/user.model');
+const keyTokenService = require('./keyToken.service');
+
 
 const { instanceConnect: redisClient } = getRedis();
 
-const newUserService = async ({ email = null, captcha = null }) => {
-    const cachedUser = await redisClient.get(`user:${email}`);
-    let existingUser;
+// const CACHE_EXPIRY = 600; // 10 minutes
 
-    if (cachedUser) {
-        existingUser = JSON.parse(cachedUser);
-    } else {
-        existingUser = await USER.findOne({ usr_email: email }).lean();
-        if (existingUser) {
-            await redisClient.set(`user:${email}`, JSON.stringify(existingUser), 'EX', 600); // Cache for 10 mins
-        }
-    }
+// const getCachedUser = async (usr_email) => {
+//     const cachedUser = await redisClient.get(`user:${usr_email}`);
+//     return cachedUser ? JSON.parse(cachedUser) : null;
+// };
+
+// const setCachedUser = async (usr_email, user) => {
+//     await redisClient.set(`user:${usr_email}`, JSON.stringify(user), 'EX', CACHE_EXPIRY);
+// };
+
+
+// signup: send email 
+const verifyEmail = async ({ usr_email = null, captcha = null }) => {
+    const existingUser = await USER.findOne({ usr_email: usr_email }).lean();
 
     if (existingUser) {
-        if (existingUser.isEmailVerified) {
-            if (existingUser.usr_status === 'active') {
-                throw new BadRequestError({
-                    message: 'Email already registered and completed',
-                    statusCode: 409,
-                });
-            } else if (existingUser.usr_status === 'pending') {
-                const result = await sendEmailToken({ email });
-                return {
-                    message: 'Verification email resent',
-                    metadata: { token: result },
-                };
-            }
-        } else {
-            const result = await sendEmailToken({ email });
+        if (existingUser.usr_status === 'active') {
+            throw new BadRequestError('Email already registered ', 409);
+        } else if (existingUser.usr_status === 'pending') {
+            const result = await sendEmailToken({ email: usr_email });
             return {
                 message: 'Verification email resent',
                 metadata: { token: result },
             };
         }
     } else {
-        const result = await sendEmailToken({ email });
-        const user = await USER.create({ usr_email: email, isEmailVerified: false, usr_status: 'pending' });
-        if (!user) throw new ErrorResponse("user not created");
-
-        await redisClient.set(`user:${email}`, JSON.stringify(user), 'EX', 600); // Cache for 10 mins
-
+        const result = await sendEmailToken({ email: usr_email });
         return {
             message: 'Verification email sent',
-            metadata: { token: result },
+            metadata: { token: result }
         };
     }
 };
 
-const verifyOTPService = async ({ token }) => {
-    const verifiedEmail = await checkEmailToken({ token });
+
+
+// signup: verify otp(email) and create user
+const verifyOTPService = async ({ otp }) => {
+    const verifiedEmail = await checkEmailToken({ otp });
 
     if (!verifiedEmail) {
         throw new ErrorResponse('Invalid OTP');
     }
 
-    const user = await USER.findOneAndUpdate(
-        { usr_email: verifiedEmail.otp_email },
-        { isEmailVerified: true },
-        { new: true }
-    );
-
-    if (!user) {
-        throw new ErrorResponse('User not found');
+    const existingUser = await USER.findOne({ usr_email: verifiedEmail.otp_email }).lean();
+    if (existingUser) {
+        throw new ErrorResponse('User already exists');
     }
 
-    await redisClient.set(`user:${user.usr_email}`, JSON.stringify(user), 'EX', 600); // Update cache
+    const user = await createUser({
+        usr_email: verifiedEmail.otp_email,
+        usr_status: 'pending' // Đánh dấu email đã xác minh nhưng chưa hoàn tất đăng ký
+    });
 
     return {
-        code: 200,
+        status: 200,
         message: 'Email verified',
         metadata: getInfoData({
-            fileds: [ "_id", "usr_email", "isEmailVerified" ],
+            fields: [ "_id", "usr_email", "usr_status" ],
             object: user
         })
     };
 };
 
-const completeRegistrationService = async ({ email, password, username }) => {
-    const cachedUser = await redisClient.get(`user:${email}`);
-    let user;
+// complete signup - set username, password, avatar, etc.
 
-    if (cachedUser) {
-        user = JSON.parse(cachedUser);
-    } else {
-        user = await USER.findOne({ usr_email: email }).lean();
-        if (user) {
-            await redisClient.set(`user:${email}`, JSON.stringify(user), 'EX', 600); // Cache for 10 mins
-        }
-    }
+const completeRegistrationService = async ({ usr_email, usr_password, usr_name }) => {
+    const user = await USER.findOne({ usr_email: usr_email }).lean();
 
     if (!user) {
         throw new ErrorResponse('Email not found');
     }
 
-    if (!user.isEmailVerified) {
-        throw new ErrorResponse('Email not verified');
+    if (user.usr_status !== 'pending') {
+        throw new ErrorResponse('Email not verified or already registered');
     }
 
-    if (user.usr_status === 'active' && user.usr_password) {
-        throw new ErrorResponse('Registration already completed');
-    }
-
-    const passwordHash = await bcrypt.hash(password, 8);
+    const passwordHash = await bcrypt.hash(usr_password, 8);
 
     const role = await findRoleByName('user');
     if (!role) {
         throw new ErrorResponse('Role not found');
     }
 
-    const updatedUser = await USER.findOneAndUpdate(
-        { usr_email: email },
+    const updatedUser = await updateUser(
+        { usr_email: usr_email },
         {
-            usr_slug: username,
-            usr_name: username,
+            usr_slug: usr_name,
+            usr_name: usr_name,
             usr_password: passwordHash,
-            usr_role: convertToObjectIdMongodb(role._id),
-            usr_status: 'active'
-        },
-        { new: true }
+            usr_role: role._id,
+            usr_status: 'active' // Cập nhật trạng thái thành active khi đăng ký hoàn tất
+        }
     );
-
-    await redisClient.set(`user:${email}`, JSON.stringify(updatedUser), 'EX', 600); // Update cache
 
     const { publicKey, privateKey } = await generateKeyPair();
 
-    const keyStore = await KeyTokenService.createKeyToken({
-        userId: updatedUser._id,
+    const keyStore = await keyTokenService.createUserToken({
+        id: updatedUser._id,
         publicKey,
         privateKey
     });
@@ -150,17 +125,17 @@ const completeRegistrationService = async ({ email, password, username }) => {
     }
 
     const tokens = await createTokenPair(
-        { userId: updatedUser._id, email },
+        { userId: updatedUser._id, usr_email },
         publicKey,
         privateKey
     );
 
     return {
-        code: 201,
+        status: 201,
         message: 'Signup complete',
         metadata: {
             user: getInfoData({
-                fileds: [ "_id", "usr_name", "usr_email" ],
+                fields: [ "_id", "usr_name", "usr_email" ],
                 object: updatedUser
             }),
             tokens
@@ -168,21 +143,99 @@ const completeRegistrationService = async ({ email, password, username }) => {
     };
 };
 
-const findUserByEmailWithLogin = async ({ email }) => {
-    const cachedUser = await redisClient.get(`user:${email}`);
-    if (cachedUser) {
-        return JSON.parse(cachedUser);
-    }
 
-    const user = await USER.findOne({ usr_email: email }).lean();
-    if (user) {
-        await redisClient.set(`user:${email}`, JSON.stringify(user), 'EX', 600); // Cache for 10 mins
+
+const login = async ({ usr_email, usr_password, refreshToken = null }) => {
+
+    const foundUser = await findByEmail({ usr_email });
+    //1
+    if (!foundUser) {
+        throw new BadRequestError("Error: User not registered");
     }
-    return user;
+    //2
+    const match = await bcrypt.compare(usr_password, foundUser.usr_password);
+    if (!match) throw new AuthFailureError("password incorrect");
+
+    //3
+    const { publicKey, privateKey } = await generateKeyPair()
+
+    //4
+    const { _id: userId } = foundUser._id;
+    const tokens = await createTokenPair(
+        { userId, usr_email },
+        publicKey,
+        privateKey
+    );
+
+    console.log(tokens, "Tokenssss");
+
+    await keyTokenService.createUserToken({
+        id: userId,
+        refreshToken: tokens.refreshToken,
+        privateKey,
+        publicKey
+    });
+
+    return {
+        message: "Login successful",
+        metadata: {
+            user: getInfoData({
+                fields: [ "_id", "usr_name", "usr_email" ],
+                object: foundUser
+            }),
+            tokens
+        },
+        status: 200
+    }
 }
 
+const logout = async (keyStore) => {
+    console.log("abc  " + keyStore._id)
+    const delKey = await keyTokenService.deleteUserKeyById(keyStore._id)
+    console.log({ delKey })
+    return delKey
+}
+
+
+// Clear all cache in Redis (dangerously)
+const clearAllCache = async () => {
+    try {
+        await redisClient.flushAll()
+        return {
+            message: 'All cache cleared successfully',
+        };
+    } catch (error) {
+        console.error("Error in clearAllCache:", error);
+        throw new ErrorResponse(error.message || 'An unknown error occurred while clearing cache', {
+            originalError: error,
+            status: error.status || 500
+        });
+    }
+};
+
+const handleRefreshToken = async () => {
+
+}
+
+const findByEmail = async ({ usr_email, select = {
+    usr_email: 1, usr_password: 2, usr_name: 1, usr_status: 1, usr_roles: 1
+} }) => {
+    try {
+        const user = await userModel.findOne({ usr_email: usr_email }).select(select).lean()
+        return user;
+    } catch (error) {
+        throw new Error(error)
+    }
+
+}
+
+
 module.exports = {
-    newUserService,
+    verifyEmail,
     verifyOTPService,
-    completeRegistrationService
+    completeRegistrationService,
+    login,
+    clearAllCache,
+    handleRefreshToken,
+    logout
 };

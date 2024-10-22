@@ -6,6 +6,6 @@ const server = app.listen(PORT, () => {
     console.log(`listening on ${PORT}`)
 })
 
-// process.on('SIGINT', () => {
-//     server.close(() => console.log(`exit server express`))
-// })
+process.on('SIGINT', () => {
+    server.close(() => console.log(`exit server express`))
+})

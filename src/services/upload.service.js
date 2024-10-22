@@ -25,28 +25,41 @@ const uploadImageFromUrl = async () => {
 
 const uploadImageFromLocal = async ({
     path,
-    folderName = 'product/8409'
+    folderName = 'product/8409',
+    allowedFormats = [ 'jpg', 'png', 'jpeg', 'webp' ],
 }) => {
     try {
+        // Check allowed formats before upload
+        const extension = path.split('.').pop().toLowerCase();
+        if (!allowedFormats.includes(extension)) {
+            throw new Error('Unsupported image format. Allowed formats: ' + allowedFormats.join(', '));
+        }
+
         const result = await cloudinary.uploader.upload(path, {
             public_id: 'thumb',
             folder: folderName,
-        })
+        });
 
         console.log(result);
+
+        const baseUrl = result.secure_url; // Store base URL for easier manipulation
+
         return {
-            image_url: result.secure_url,
+            image_url: baseUrl, // Use baseUrl for consistency
             shopId: 8409,
-            thumb_url: await cloudinary.url(result.public_id, {
+            thumb_url: cloudinary.url(result.public_id, {
                 height: 100,
                 width: 100,
-                format: 'jpg',
+                // Allow specifying a format from allowedFormats if needed:
+                format: format || 'jpg' // Use default or preferred format
             })
-        }
+        };
     } catch (error) {
-        console.log('Error uploading image: ' + error)
+        console.error('Error uploading image:', error); // Use console.error for more visibility
     }
-}
+};
+
+
 
 module.exports = {
     uploadImageFromUrl, uploadImageFromLocal

@@ -1,64 +1,46 @@
 'use strict';
 
-const ObjectId = require('mongoose').Types.ObjectId;
-const keytokenModel = require('../models/keytoken.model');
+const { UserToken, ShopToken } = require('../models/keytoken.model');
+const TokenRepository = require('../models/repositories/token.repo');
 
 class KeyTokenService {
+    constructor () {
+        this.userTokenRepo = new TokenRepository(UserToken, 'user');
+        this.shopTokenRepo = new TokenRepository(ShopToken, 'shop');
+    }
 
-    static createKeyToken = async ({ userId, publicKey, privateKey, refreshToken }) => {
-        try {
-
-            const filter = { user: userId }, update = {
-                publicKey,
-                privateKey,
-                refreshTokensUsed: [],
-                refreshToken
-            }, options = { upsert: true, new: true }
-
-            const tokens = await keytokenModel.findOneAndUpdate(filter, update, options)
-
-            return tokens ? tokens.publicKey : null
-        } catch (error) {
-            return error
-        }
+     async createUserToken({id, publicKey, privateKey, refreshToken}) {
+        return this.userTokenRepo.createOrUpdate({id, publicKey, privateKey, refreshToken});
     }
 
 
-    static async findByUserId(userId) {
-        return await keytokenModel.findOne({ user: new ObjectId(userId) })
+     async createShopToken(params) {
+        return this.shopTokenRepo.createOrUpdate(params);   
     }
 
-    static removeKeyById = async (id) => {
-        return await keytokenModel.deleteOne({ _id: id})
+     async findByUserId(userId) {
+        return this.userTokenRepo.findById(userId);
     }
 
-    static findByRefreshTokenUsed = async (refreshToken) => {
-        return await keytokenModel.findOne({ refreshTokensUsed: refreshToken }).lean()
+     async findByShopId(shopId) {
+        return this.shopTokenRepo.findById(shopId);
     }
 
-    static findByRefreshToken = async (refreshToken) => {
-        return await keytokenModel.findOne({ refreshToken: refreshToken  }).lean()
+     async deleteUserKeyById(userId) {
+        return this.userTokenRepo.deleteById(userId);
     }
 
-
-    static deleteKeyById = async (userId) => {
-        return await keytokenModel.deleteOne({ user: new ObjectId(userId) })
+     async deleteShopKeyById(shopId) {
+        return this.shopTokenRepo.deleteById(shopId);
     }
 
-    // todo: asymmetric cryptography(sử dụng với khoá bất đối xứng)
-    // static createKeyToken = async ({ userId, publicKey }) => {
-    //     try {
-    //         const publicKeyString = publicKey.toString()
-    //         const tokens = await keytokenModel.create({
-    //             user: userId,
-    //             publicKey: publicKeyString
-    //         })
-    //         console.log(tokens)
-    //         return tokens ? tokens.publicKey : null
-    //     } catch (error) {
-    //         return error
-    //     }
-    // }
+     async findUserByRefreshToken(refreshToken, used = false) {
+        return this.userTokenRepo.findByRefreshToken(refreshToken, used);
+    }
+
+     async findShopByRefreshToken(refreshToken, used = false) {
+        return this.shopTokenRepo.findByRefreshToken(refreshToken, used);
+    }
 }
 
-module.exports = KeyTokenService;
+module.exports = new KeyTokenService();

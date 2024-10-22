@@ -3,68 +3,62 @@
 const { SuccessResponse } = require("../core/success.response");
 const passport = require("passport");
 const {
-    newUserService,
+    verifyEmail,
     verifyOTPService,
     completeRegistrationService,
 } = require("../services/user.service");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
+const UserService = require('../services/user.service');
+const { BadRequestError, ErrorResponse } = require("../core/error.response");
 
 class UserController {
     //new user
-    newUser = async (req, res, next) => {
-        try {
-            const respond = await newUserService({
-                email: req.body.email,
+    verifyEmail = async (req, res, next) => {
+       
+            const respond = await verifyEmail({
+                usr_email: req.body.usr_email,
             });
 
             new SuccessResponse(respond).send(res);
-        } catch (error) {
-            next(error);
-        }
+        
     };
 
     // check user token via email
     checkOtp = async (req, res, next) => {
-        try {
-            const { token = null } = req.query;
+            const { otp = null } = req.body;
 
-            if (!token) {
+            console.log(req.body);
+
+            if (!otp) {
                 throw new BadRequestError({
-                    message: "Token is required",
-                    statusCode: 400,
+                    message: "OTP inCorrect",
+                    status: 400,
                 });
             }
 
-            const respond = await verifyOTPService({ token });
+            const respond = await verifyOTPService({ otp });
 
             new SuccessResponse({
-                message: "Check registration",
-                metadata: respond,
+                message: respond.message,
+                metadata: respond.metadata,
             }).send(res);
-        } catch (error) {
-            // If an error is thrown, use the error handling middleware
-            next(error);
-        }
+       
     };
 
     // complete
     signup = async (req, res, next) => {
-        try {
+     
             const respond = await completeRegistrationService({
-                email: req.body.email,
-                password: req.body.password,
-                username: req.body.username,
+                usr_email: req.body.usr_email,
+                usr_password: req.body.usr_password,
+                usr_name: req.body.usr_name,
             });
 
             new SuccessResponse({
-                statusCode: 201,
-                message: "complete registration",
-                metadata: respond,
+                status: respond.status,
+                message: respond.message,
+                metadata: respond.metadata,
             }).send(res);
-        } catch (error) {
-            next(error);
-        }
+       
     };
 
 
@@ -77,8 +71,8 @@ class UserController {
     authFb = passport.authenticate('facebook');
 
     // Handle Google OAuth callback
-    authGoogleCallback = async(req, res, next) => {
-        passport.authenticate('google', (err, user, info) => {
+    authGoogleCallback = async (req, res, next) => {
+        passport.authenticate('google', (err, user) => {
             if (err) {
                 return res.status(400).json({ error: err.message });
             }
@@ -99,7 +93,7 @@ class UserController {
 
     // Handle Facebook OAuth callback
     authFacebookCallback = async (req, res, next) => {
-        passport.authenticate('facebook', (err, user, info) => {
+        passport.authenticate('facebook', (err, user) => {
             if (err) {
                 return res.status(400).json({ error: err.message });
             }
@@ -119,24 +113,47 @@ class UserController {
     };
 
 
-    login = async (req, res, next) => {
-        try {
-
-        } catch (error) {
-
+    login = async (req, res) => {
+        const { usr_email } = req.body
+        if (!usr_email) {
+            throw new BadRequestError('email missing.....')
+        }
+        const sendData = Object.assign(
+            { requestId: req.requestId },
+            req.body
+        )
+        console.log(JSON.stringify(sendData) + "send data");
+        const { status, ...result } = await UserService.login(sendData)
+        if (status === 200) {
+            new SuccessResponse(result).send(res)
+        } else {
+            console.log(result + "result...");
+            new ErrorResponse({
+                message: result.message,
+                metadata: result.metadata
+            }).send(res)
         }
     }
 
-    logout = async (req, res, next) => {
-        try {
-
-        } catch (error) {
-
-        }
+    logout = async (req, res) => {
+        new SuccessResponse({
+            message: 'Logged out successfully',
+            metadata: await UserService.logout(req.keyStore)
+        }).send(res)
     }
 
-    handlerRefreshToken = async (req, res, next) => {
+    // handlerRefreshToken = async (req, res, next) => {
 
+    // }
+
+    clearAllCache = async (req, res, next) => {
+        
+            const response = await UserService.clearAllCache()
+            new SuccessResponse({
+                message: 'All cache cleared successfully',
+                metadata: response
+            }).send(res)
+        
     }
 }
 

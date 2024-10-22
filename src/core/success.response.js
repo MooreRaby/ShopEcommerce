@@ -2,20 +2,20 @@
 'use strict';
 
 
-const StatusCode = {
+const Status = {
     OK: 200,
     CREATED: 201
 }
 
-const ReasonStatusCode = {
+const ReasonStatus = {
     CREATED: 'Created!',
     OK: 'Success'
 }
 
 class SuccessResponse {
-    constructor ({ message, statusCode = StatusCode.OK, reasonStatusCode = ReasonStatusCode.OK, metadata = {} }) {
-        this.message = !message ? reasonStatusCode : message
-        this.status = statusCode
+    constructor ({ message, status = Status.OK, reasonStatus = ReasonStatus.OK, metadata = {} }) {
+        this.message = !message ? reasonStatus : message
+        this.status = status
         this.metadata = metadata
     }
 
@@ -23,14 +23,18 @@ class SuccessResponse {
         return res.status(this.status).json(this)
     }
 }
+
+
 class OK extends SuccessResponse {
     constructor ({ message, metadata }) {
         super({ message, metadata })
     }
 }
+
+
 class CREATED extends SuccessResponse {
-    constructor ({ options = {}, message, statusCode = StatusCode.CREATED, reasonStatusCode = ReasonStatusCode.CREATED, metadata }) {
-        super({ message, statusCode, reasonStatusCode, metadata })
+    constructor ({ options = {}, message, status = Status.CREATED, reasonStatus = ReasonStatus.CREATED, metadata }) {
+        super({ message, status, reasonStatus, metadata })
         this.options = options
     }
 }

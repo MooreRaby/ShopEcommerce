@@ -2,46 +2,23 @@
 
 const RESOURCE = require('../models/resource.model')
 const ROLE = require('../models/role.model')
-/**
- * new resource
- * @param {string} rol_name
- * @param {string} slug
- * @param {string} description
- */
-const createResource = async ({
-    name = 'profile',
-    slug = 'p00001',
-    description = ''
-}) => {
+
+const createResource = async ({ name, slug, description }) => {
     try {
-        // 1.  check name or slug exists
+        const existingResource = await RESOURCE.findOne({ src_slug: slug })
+        if (existingResource) throw new Error('Resource slug already exists')
 
-
-        // 2. new resource
-        const resource = await RESOURCE.create({
-            src_name: name,
-            src_slug: slug,
-            src_description: description
-        })
-
+        const resource = await RESOURCE.create({ src_name: name, src_slug: slug, src_description: description })
         return resource
     } catch (error) {
-        return error.message
+        throw new Error(error.message)
     }
 }
 
-
-const resourceList = async ({
-    userId = 0,// admin
-    limit = 30,
-    offset = 0,
-    search = ''
-}) => {
+const resourceList = async ({ limit = 30, offset = 0, search = '' }) => {
     try {
-        //1 . check admin ? middleware function
-
-        //2. get list of resource
         const resources = await RESOURCE.aggregate([
+            { $match: { src_name: new RegExp(search, 'i') } },
             {
                 $project: {
                     _id: 0,
@@ -49,59 +26,35 @@ const resourceList = async ({
                     slug: "$src_slug",
                     description: "$src_description",
                     resourceId: "$_id",
-                    createAt: 1
+                    createdAt: 1
                 }
-            }
+            },
+            { $skip: offset },
+            { $limit: limit }
         ])
-
         return resources
     } catch (error) {
-        return []
+        throw new Error(error.message)
     }
 }
 
-
-const createRole = async ({
-    name = 'shop',
-    slug = 's00001',
-    description = 'extend from shop or user',
-    grants = []
-}) => {
+const createRole = async ({ name, slug, description, grants }) => {
     try {
-        // 1. check role exists
+        const existingRole = await ROLE.findOne({ rol_slug: slug })
+        if (existingRole) throw new Error('Role slug already exists')
 
-
-        //2. new role
-        const role = await ROLE.create({
-            rol_name: name,
-            rol_slug: slug,
-            rol_description: description,
-            rol_grants: grants
-        })
-
+        const role = await ROLE.create({ rol_name: name, rol_slug: slug, rol_description: description, rol_grants: grants })
         return role
     } catch (error) {
-        return error
+        throw new Error(error.message)
     }
 }
 
-
-const roleList = async ({
-    userId = 0,// admin
-    limit = 30,
-    offset = 0,
-    search = ''
-}) => {
+const roleList = async ({ limit = 30, offset = 0, search = '' }) => {
     try {
-        // 1. user id
-
-
-
-        //2 .list role
         const roles = await ROLE.aggregate([
-            {
-                $unwind: '$rol_grants'
-            },
+            { $match: { rol_name: new RegExp(search, 'i') } },
+            { $unwind: '$rol_grants' },
             {
                 $lookup: {
                     from: 'Resources',
@@ -110,9 +63,7 @@ const roleList = async ({
                     as: 'resource'
                 }
             },
-            {
-                $unwind: '$resource'
-            },
+            { $unwind: '$resource' },
             {
                 $project: {
                     role: '$rol_name',
@@ -121,26 +72,22 @@ const roleList = async ({
                     attributes: '$rol_grants.attributes'
                 }
             },
-            {
-                $unwind: '$action'
-            },
+            { $unwind: '$action' },
             {
                 $project: {
                     _id: 0,
                     role: 1,
                     resource: 1,
-                    action: '$action',
+                    action: 1,
                     attributes: 1
                 }
-            }
-            
-
+            },
+            { $skip: offset },
+            { $limit: limit }
         ])
-
-
         return roles
     } catch (error) {
-
+        throw new Error(error.message)
     }
 }
 

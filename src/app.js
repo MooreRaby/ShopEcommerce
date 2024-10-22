@@ -1,14 +1,14 @@
 
 require('dotenv').config()
-const compression       = require('compression'),
-    express             = require('express'),
+const compression = require('compression'),
+    express = require('express'),
     { default: helmet } = require('helmet'),
-    cors                = require('cors'),
-    morgan              = require('morgan'),
-    app                 = express(),
-    { v4: uuid }        = require('uuid'),
-    passport            = require('passport'),
-    passportConfig      = require('./configs/passport.config')
+    cors = require('cors'),
+    morgan = require('morgan'),
+    app = express(),
+    { v4: uuid } = require('uuid'),
+    passport = require('passport'),
+    passportConfig = require('./configs/passport.config')
 
 //cors
 
@@ -59,7 +59,6 @@ initRedis.initRedis()
 // passport
 app.use(passport.initialize())
 // passport config
-
 passportConfig(passport)
 
 //init routes
@@ -67,14 +66,22 @@ app.use('/', require('./routes'))
 
 // handle errors
 
-app.use((req, res, next) => {
-    const error = new Error('Not Found')
-    error.status = 404
-    next(error)
+app.use((err, req, res, next) => {
+    if (!err.status) {
+        // Nếu không có status, tức là đây là lỗi không được xử lý trước đó, ta gán 404.
+        const error = new Error('Not Found');
+        error.status = 404;
+        next(error);
+    } else {
+        next(err);
+    }
 })
 
+
+// logger 
 app.use((error, req, res, next) => {
-    const statusCode = error.status || 500
+    
+    const status = error.status || 500
     const resMessage = `${error.status} - ${Date.now()}ms - response: ${JSON.stringify(error)}`
     myloggerLog.error(resMessage, [
         req.path,
@@ -84,9 +91,9 @@ app.use((error, req, res, next) => {
         }
     ])
 
-    return res.status(statusCode).json({
-        status: 'error',
-        code: statusCode,
+    return res.status(status).json({
+    
+        status: status,
         stack: error.stack,
         message: error.message || 'Internal Server Error'
     })

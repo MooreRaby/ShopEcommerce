@@ -1,35 +1,47 @@
 'use strict';
 
-const crypto = require('crypto');
+const randomstring = require('randomstring');
 
 //model otp
 const OTP = require('../models/otp.model')
 
 const generatorTokenRandom = () => {
-    // Tạo một số ngẫu nhiên trong khoảng từ 100000 đến 999999
-    const token = crypto.randomInt(100000, 1000000);
-    return token;
+    return randomstring.generate({
+        length: 6,
+        charset: 'numeric'
+    });
 }
 
-const newOtp = async ({
-    email
-}) => {
-    const token = generatorTokenRandom()
-    const newToken = await OTP.create({
-        otp_token: token,
-        otp_email: email
-    })
+const newOtp = async ({ email }) => {
+    const otp = generatorTokenRandom();
 
-    return newToken
+    // Kiểm tra xem OTP đã tồn tại cho email này hay chưa
+    const existingOTP = await OTP.findOne({ otp_email: email });
+
+    if (existingOTP) {
+        // Nếu OTP đã tồn tại, cập nhật với mã OTP mới
+        existingOTP.otp_token = otp;
+        await existingOTP.save();
+        return existingOTP;
+    } else {
+        // Nếu OTP chưa tồn tại, tạo mới
+        const newOTP = await OTP.create({
+            otp_token: otp,
+            otp_email: email
+        });
+        return newOTP;
+    }
 }
 
 const checkEmailToken = async ({
-    token
+    otp
 }) => {
 
+    // clgtest
+    console.log(otp + "token9999");
     // check token in model otp
     const foundToken = await OTP.findOne({
-        otp_token: token
+        otp_token: otp
     })
 
     if (foundToken) {
@@ -39,7 +51,7 @@ const checkEmailToken = async ({
     }
 
     // delete token from model
-    OTP.deleteOne({ otp_token: token }).then()
+    OTP.deleteOne({ otp_token: otp }).then()
 
     return foundToken
 }

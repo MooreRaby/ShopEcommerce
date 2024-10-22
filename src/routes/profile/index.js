@@ -11,5 +11,4 @@ router.get('/viewAny', grantAccess('readAny', 'profile'), profiles)
 // shop
 router.get('viewOwn', grantAccess('readOwn', 'profile'), profile)
 
-
 module.exports = router

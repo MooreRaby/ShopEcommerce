@@ -1,0 +1,1416 @@
+{
+  "code": 0,
+  "message": "success",
+  "user_message": "success",
+  "data": {
+    "tier_variation_list": [
+      {
+        "id": 101054,
+        "name": "Màu sắc",
+        "is_default_fill": false,
+        "group_list": [
+          {
+            "group_id": "0",
+            "name": "",
+            "value_list": [
+              {
+                "value_id": 6242,
+                "name": "Đỏ"
+              },
+              {
+                "value_id": 6243,
+                "name": "Cam"
+              },
+              {
+                "value_id": 6244,
+                "name": "Vàng"
+              },
+              {
+                "value_id": 6245,
+                "name": "Xanh lá"
+              },
+              {
+                "value_id": 6246,
+                "name": "Xanh dương"
+              },
+              {
+                "value_id": 6247,
+                "name": "Tím"
+              },
+              {
+                "value_id": 6248,
+                "name": "Hồng"
+              },
+              {
+                "value_id": 6249,
+                "name": "Xanh quân đội"
+              },
+              {
+                "value_id": 6250,
+                "name": "Xanh dương nhạt"
+              },
+              {
+                "value_id": 6251,
+                "name": "Tím nhạt"
+              },
+              {
+                "value_id": 6252,
+                "name": "Trắng"
+              },
+              {
+                "value_id": 6254,
+                "name": "Bạc"
+              },
+              {
+                "value_id": 6255,
+                "name": "Nâu"
+              },
+              {
+                "value_id": 6256,
+                "name": "Màu kaki"
+              },
+              {
+                "value_id": 6257,
+                "name": "Màu nude"
+              },
+              {
+                "value_id": 6258,
+                "name": "Đen"
+              },
+              {
+                "value_id": 6259,
+                "name": "Vàng gold"
+              },
+              {
+                "value_id": 9167,
+                "name": "Xám tro"
+              },
+              {
+                "value_id": 9171,
+                "name": "Hồng baby"
+              },
+              {
+                "value_id": 9172,
+                "name": "Be"
+              },
+              {
+                "value_id": 9182,
+                "name": "Đỏ tươi"
+              },
+              {
+                "value_id": 9197,
+                "name": "Hồng cherry"
+              },
+              {
+                "value_id": 9202,
+                "name": "Nâu cafe"
+              },
+              {
+                "value_id": 9203,
+                "name": "Vàng đồng"
+              },
+              {
+                "value_id": 9211,
+                "name": "Be đậm"
+              },
+              {
+                "value_id": 9212,
+                "name": "Xanh dương đậm"
+              },
+              {
+                "value_id": 9213,
+                "name": "Nâu đậm"
+              },
+              {
+                "value_id": 9215,
+                "name": "Xám đậm"
+              },
+              {
+                "value_id": 9216,
+                "name": "Xanh lá đậm"
+              },
+              {
+                "value_id": 9219,
+                "name": "Cam đậm"
+              },
+              {
+                "value_id": 9220,
+                "name": "Hồng đậm"
+              },
+              {
+                "value_id": 9221,
+                "name": "Tím đậm"
+              },
+              {
+                "value_id": 9222,
+                "name": "Đỏ đậm"
+              },
+              {
+                "value_id": 9226,
+                "name": "Vàng đậm"
+              },
+              {
+                "value_id": 9231,
+                "name": "Xanh lục bảo"
+              },
+              {
+                "value_id": 9253,
+                "name": "Xám"
+              },
+              {
+                "value_id": 9265,
+                "name": "Xám chì"
+              },
+              {
+                "value_id": 9268,
+                "name": "Be nhạt"
+              },
+              {
+                "value_id": 9269,
+                "name": "Nâu nhạt"
+              },
+              {
+                "value_id": 9271,
+                "name": "Xanh lá nhạt"
+              },
+              {
+                "value_id": 9274,
+                "name": "Cam nhạt"
+              },
+              {
+                "value_id": 9275,
+                "name": "Hồng nhạt"
+              },
+              {
+                "value_id": 9276,
+                "name": "Đỏ nhạt"
+              },
+              {
+                "value_id": 9280,
+                "name": "Vàng nhạt"
+              },
+              {
+                "value_id": 9281,
+                "name": "Tím cà"
+              },
+              {
+                "value_id": 9288,
+                "name": "Đen nhám"
+              },
+              {
+                "value_id": 9316,
+                "name": "Vàng ánh kim"
+              },
+              {
+                "value_id": 9325,
+                "name": "Trắng sữa"
+              },
+              {
+                "value_id": 9326,
+                "name": "Xanh mint"
+              },
+              {
+                "value_id": 9327,
+                "name": "Xanh rêu"
+              },
+              {
+                "value_id": 9328,
+                "name": "Màu mù tạt"
+              },
+              {
+                "value_id": 9329,
+                "name": "Xanh navy"
+              },
+              {
+                "value_id": 9334,
+                "name": "Xám phản quang"
+              },
+              {
+                "value_id": 9335,
+                "name": "Hồng neon"
+              },
+              {
+                "value_id": 9584,
+                "name": "Xanh ô liu"
+              },
+              {
+                "value_id": 9598,
+                "name": "Hồng đào"
+              },
+              {
+                "value_id": 9610,
+                "name": "Xanh hoàng gia"
+              },
+              {
+                "value_id": 9622,
+                "name": "Xanh thiên thanh"
+              },
+              {
+                "value_id": 9633,
+                "name": "Tím than"
+              },
+              {
+                "value_id": 9635,
+                "name": "Đỏ rượu"
+              },
+              {
+                "value_id": 9915,
+                "name": "Màu mơ"
+              },
+              {
+                "value_id": 9938,
+                "name": "Cam gạch"
+              },
+              {
+                "value_id": 9939,
+                "name": "Đỏ gạch"
+              },
+              {
+                "value_id": 9941,
+                "name": "Xám sáng"
+              },
+              {
+                "value_id": 9943,
+                "name": "Vàng bò"
+              },
+              {
+                "value_id": 9953,
+                "name": "Xanh chuối"
+              },
+              {
+                "value_id": 9954,
+                "name": "Nâu socola"
+              },
+              {
+                "value_id": 9957,
+                "name": "Xanh cổ điển"
+              },
+              {
+                "value_id": 9967,
+                "name": "Xanh coban"
+              },
+              {
+                "value_id": 9972,
+                "name": "Hồng kem"
+              },
+              {
+                "value_id": 9973,
+                "name": "Trắng kem"
+              },
+              {
+                "value_id": 9976,
+                "name": "Xanh lơ"
+              },
+              {
+                "value_id": 9988,
+                "name": "Cam đất"
+              },
+              {
+                "value_id": 10073,
+                "name": "Hồng gold"
+              },
+              {
+                "value_id": 10076,
+                "name": "Tím nho"
+              },
+              {
+                "value_id": 10081,
+                "name": "Xám nhạt"
+              },
+              {
+                "value_id": 10085,
+                "name": "Xanh bơ"
+              },
+              {
+                "value_id": 10133,
+                "name": "Xanh chàm"
+              },
+              {
+                "value_id": 10135,
+                "name": "Trắng ngà"
+              },
+              {
+                "value_id": 10136,
+                "name": "Xanh ngọc bích"
+              },
+              {
+                "value_id": 10143,
+                "name": "Vàng chanh"
+              },
+              {
+                "value_id": 10149,
+                "name": "Nâu sáng"
+              },
+              {
+                "value_id": 10154,
+                "name": "Đỏ tía"
+              },
+              {
+                "value_id": 10157,
+                "name": "Đỏ Maroon"
+              },
+              {
+                "value_id": 10158,
+                "name": "Xanh matcha"
+              },
+              {
+                "value_id": 10162,
+                "name": "Bạc ánh kim"
+              },
+              {
+                "value_id": 10163,
+                "name": "Xanh cốm"
+              },
+              {
+                "value_id": 10165,
+                "name": "Nâu trà"
+              },
+              {
+                "value_id": 10169,
+                "name": "Nâu rêu"
+              },
+              {
+                "value_id": 10170,
+                "name": "Xám lông chuột"
+              },
+              {
+                "value_id": 10180,
+                "name": "Hồng nude"
+              },
+              {
+                "value_id": 10185,
+                "name": "Trắng đục"
+              },
+              {
+                "value_id": 10190,
+                "name": "Xám nhạt pastel"
+              },
+              {
+                "value_id": 10192,
+                "name": "Xanh lông công"
+              },
+              {
+                "value_id": 10194,
+                "name": "Hồng vỏ đỗ"
+              },
+              {
+                "value_id": 10198,
+                "name": "Hồng phấn"
+              },
+              {
+                "value_id": 10201,
+                "name": "Bạch kim"
+              },
+              {
+                "value_id": 10203,
+                "name": "Đỏ mận"
+              },
+              {
+                "value_id": 10204,
+                "name": "Hồng đất"
+              },
+              {
+                "value_id": 10212,
+                "name": "Nâu đất"
+              },
+              {
+                "value_id": 10217,
+                "name": "Đỏ đô"
+              },
+              {
+                "value_id": 10220,
+                "name": "Hồng ruốc"
+              },
+              {
+                "value_id": 10221,
+                "name": "Đỏ hoa hồng"
+              },
+              {
+                "value_id": 10231,
+                "name": "Xám khói"
+              },
+              {
+                "value_id": 10238,
+                "name": "Xanh đá"
+              },
+              {
+                "value_id": 10239,
+                "name": "Hồng dâu"
+              },
+              {
+                "value_id": 10241,
+                "name": "Đen da lộn"
+              },
+              {
+                "value_id": 10243,
+                "name": "Tím khoai môn"
+              },
+              {
+                "value_id": 10249,
+                "name": "Xanh tosca"
+              },
+              {
+                "value_id": 10252,
+                "name": "Trắng trong"
+              },
+              {
+                "value_id": 10256,
+                "name": "Xanh ngọc"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 101056,
+        "name": "Size",
+        "is_default_fill": false,
+        "group_list": [
+          {
+            "group_id": "841350765989888",
+            "name": "Size (US)",
+            "value_list": [
+              {
+                "value_id": 6381,
+                "name": "2"
+              },
+              {
+                "value_id": 6382,
+                "name": "3"
+              },
+              {
+                "value_id": 6383,
+                "name": "3.5"
+              },
+              {
+                "value_id": 6384,
+                "name": "4"
+              },
+              {
+                "value_id": 6385,
+                "name": "4.5"
+              },
+              {
+                "value_id": 6386,
+                "name": "5"
+              },
+              {
+                "value_id": 6387,
+                "name": "5.5"
+              },
+              {
+                "value_id": 6388,
+                "name": "6"
+              },
+              {
+                "value_id": 6389,
+                "name": "6.5"
+              },
+              {
+                "value_id": 6390,
+                "name": "7"
+              },
+              {
+                "value_id": 6391,
+                "name": "7.5"
+              },
+              {
+                "value_id": 6392,
+                "name": "8"
+              },
+              {
+                "value_id": 6393,
+                "name": "8.5"
+              },
+              {
+                "value_id": 6394,
+                "name": "9"
+              },
+              {
+                "value_id": 6395,
+                "name": "9.5"
+              },
+              {
+                "value_id": 6396,
+                "name": "10"
+              },
+              {
+                "value_id": 6397,
+                "name": "10.5"
+              },
+              {
+                "value_id": 6398,
+                "name": "11"
+              },
+              {
+                "value_id": 6399,
+                "name": "11.5"
+              },
+              {
+                "value_id": 6400,
+                "name": "12"
+              },
+              {
+                "value_id": 6401,
+                "name": "12.5"
+              },
+              {
+                "value_id": 6402,
+                "name": "13"
+              },
+              {
+                "value_id": 6403,
+                "name": "13.5"
+              },
+              {
+                "value_id": 6404,
+                "name": "14"
+              },
+              {
+                "value_id": 6405,
+                "name": "14.5"
+              },
+              {
+                "value_id": 6406,
+                "name": "15"
+              },
+              {
+                "value_id": 6407,
+                "name": "15.5"
+              },
+              {
+                "value_id": 6408,
+                "name": "16"
+              },
+              {
+                "value_id": 6409,
+                "name": "18"
+              },
+              {
+                "value_id": 6426,
+                "name": "Free Size"
+              },
+              {
+                "value_id": 9757,
+                "name": "20"
+              }
+            ]
+          },
+          {
+            "group_id": "841350766016532",
+            "name": "Size (Inch)",
+            "value_list": [
+              {
+                "value_id": 9694,
+                "name": "Inch: 21 in"
+              },
+              {
+                "value_id": 9695,
+                "name": "Inch: 23 in"
+              },
+              {
+                "value_id": 9696,
+                "name": "Inch: 25 in"
+              },
+              {
+                "value_id": 9697,
+                "name": "Inch: 26 in"
+              },
+              {
+                "value_id": 9698,
+                "name": "Inch: 27 in"
+              },
+              {
+                "value_id": 10090,
+                "name": "12 in"
+              },
+              {
+                "value_id": 10094,
+                "name": "16 in"
+              },
+              {
+                "value_id": 10096,
+                "name": "18 in"
+              },
+              {
+                "value_id": 10098,
+                "name": "20 in"
+              },
+              {
+                "value_id": 10099,
+                "name": "22 in"
+              },
+              {
+                "value_id": 10100,
+                "name": "24 in"
+              },
+              {
+                "value_id": 10101,
+                "name": "28 in"
+              },
+              {
+                "value_id": 10102,
+                "name": "29 in"
+              },
+              {
+                "value_id": 10105,
+                "name": "30 in"
+              },
+              {
+                "value_id": 10106,
+                "name": "31 in"
+              },
+              {
+                "value_id": 10107,
+                "name": "32 in"
+              },
+              {
+                "value_id": 10108,
+                "name": "Inch: 33 in"
+              },
+              {
+                "value_id": 10109,
+                "name": "Inch: 34 in"
+              },
+              {
+                "value_id": 10110,
+                "name": "Inch: 35 in"
+              },
+              {
+                "value_id": 10111,
+                "name": "Inch: 36 in"
+              },
+              {
+                "value_id": 10112,
+                "name": "Inch: 37 in"
+              },
+              {
+                "value_id": 10113,
+                "name": "Inch: 38 in"
+              },
+              {
+                "value_id": 10114,
+                "name": "Inch: 39 in"
+              },
+              {
+                "value_id": 10117,
+                "name": "Inch: 40 in"
+              },
+              {
+                "value_id": 10118,
+                "name": "Inch: 41 in"
+              },
+              {
+                "value_id": 10119,
+                "name": "Inch: 42 in"
+              },
+              {
+                "value_id": 10120,
+                "name": "Inch: 43 in"
+              },
+              {
+                "value_id": 10121,
+                "name": "Inch: 44 in"
+              },
+              {
+                "value_id": 10122,
+                "name": "Inch: 45 in"
+              },
+              {
+                "value_id": 10123,
+                "name": "Inch: 46 in"
+              },
+              {
+                "value_id": 10124,
+                "name": "Inch: 47 in"
+              },
+              {
+                "value_id": 10125,
+                "name": "Inch: 48 in"
+              },
+              {
+                "value_id": 10126,
+                "name": "Inch: 49 in"
+              },
+              {
+                "value_id": 10129,
+                "name": "Inch: 50 in"
+              }
+            ]
+          },
+          {
+            "group_id": "841350766025775",
+            "name": "Size (EU)",
+            "value_list": [
+              {
+                "value_id": 6281,
+                "name": "30"
+              },
+              {
+                "value_id": 6333,
+                "name": "32"
+              },
+              {
+                "value_id": 6326,
+                "name": "33"
+              },
+              {
+                "value_id": 6331,
+                "name": "34"
+              },
+              {
+                "value_id": 6300,
+                "name": "35"
+              },
+              {
+                "value_id": 6330,
+                "name": "36"
+              },
+              {
+                "value_id": 6299,
+                "name": "37"
+              },
+              {
+                "value_id": 6302,
+                "name": "38"
+              },
+              {
+                "value_id": 6316,
+                "name": "39"
+              },
+              {
+                "value_id": 6290,
+                "name": "40"
+              },
+              {
+                "value_id": 6277,
+                "name": "41"
+              },
+              {
+                "value_id": 6286,
+                "name": "42"
+              },
+              {
+                "value_id": 6275,
+                "name": "44"
+              },
+              {
+                "value_id": 6329,
+                "name": "46"
+              },
+              {
+                "value_id": 6273,
+                "name": "17.5"
+              },
+              {
+                "value_id": 6274,
+                "name": "47"
+              },
+              {
+                "value_id": 6276,
+                "name": "27.5"
+              },
+              {
+                "value_id": 6278,
+                "name": "44.5"
+              },
+              {
+                "value_id": 6279,
+                "name": "29"
+              },
+              {
+                "value_id": 6280,
+                "name": "27"
+              },
+              {
+                "value_id": 6282,
+                "name": "28.5"
+              },
+              {
+                "value_id": 6283,
+                "name": "43.5"
+              },
+              {
+                "value_id": 6284,
+                "name": "23.5"
+              },
+              {
+                "value_id": 6285,
+                "name": "45"
+              },
+              {
+                "value_id": 6287,
+                "name": "41.5"
+              },
+              {
+                "value_id": 6288,
+                "name": "26.5"
+              },
+              {
+                "value_id": 6289,
+                "name": "28"
+              },
+              {
+                "value_id": 6291,
+                "name": "29.5"
+              },
+              {
+                "value_id": 6292,
+                "name": "42.5"
+              },
+              {
+                "value_id": 6293,
+                "name": "45.5"
+              },
+              {
+                "value_id": 6294,
+                "name": "35.5"
+              },
+              {
+                "value_id": 6295,
+                "name": "22.5"
+              },
+              {
+                "value_id": 6296,
+                "name": "21.5"
+              },
+              {
+                "value_id": 6297,
+                "name": "18.5"
+              },
+              {
+                "value_id": 6298,
+                "name": "23"
+              },
+              {
+                "value_id": 6301,
+                "name": "22"
+              },
+              {
+                "value_id": 6303,
+                "name": "20.5"
+              },
+              {
+                "value_id": 6304,
+                "name": "25"
+              },
+              {
+                "value_id": 6305,
+                "name": "39.5"
+              },
+              {
+                "value_id": 6306,
+                "name": "40.5"
+              },
+              {
+                "value_id": 6307,
+                "name": "24.5"
+              },
+              {
+                "value_id": 6308,
+                "name": "25.5"
+              },
+              {
+                "value_id": 6309,
+                "name": "38.5"
+              },
+              {
+                "value_id": 6310,
+                "name": "21"
+              },
+              {
+                "value_id": 6311,
+                "name": "43"
+              },
+              {
+                "value_id": 6312,
+                "name": "36.5"
+              },
+              {
+                "value_id": 6313,
+                "name": "24"
+              },
+              {
+                "value_id": 6314,
+                "name": "37.5"
+              },
+              {
+                "value_id": 6315,
+                "name": "26"
+              },
+              {
+                "value_id": 6317,
+                "name": "30.5"
+              },
+              {
+                "value_id": 6318,
+                "name": "31"
+              },
+              {
+                "value_id": 6319,
+                "name": "31.5"
+              },
+              {
+                "value_id": 6320,
+                "name": "32.5"
+              },
+              {
+                "value_id": 6321,
+                "name": "18"
+              },
+              {
+                "value_id": 6322,
+                "name": "19"
+              },
+              {
+                "value_id": 6323,
+                "name": "34.5"
+              },
+              {
+                "value_id": 6324,
+                "name": "19.5"
+              },
+              {
+                "value_id": 6325,
+                "name": "20"
+              },
+              {
+                "value_id": 6327,
+                "name": "17"
+              },
+              {
+                "value_id": 6328,
+                "name": "33.5"
+              },
+              {
+                "value_id": 6332,
+                "name": "46.5"
+              },
+              {
+                "value_id": 6711,
+                "name": "16.5"
+              },
+              {
+                "value_id": 6712,
+                "name": "16"
+              }
+            ]
+          },
+          {
+            "group_id": "841350766041089",
+            "name": "Size (Tuổi)",
+            "value_list": [
+              {
+                "value_id": 9884,
+                "name": "0 tuổi"
+              },
+              {
+                "value_id": 9885,
+                "name": "1 tuổi"
+              },
+              {
+                "value_id": 9886,
+                "name": "10 tuổi"
+              },
+              {
+                "value_id": 9887,
+                "name": "11 tuổi"
+              },
+              {
+                "value_id": 9889,
+                "name": "12 tuổi"
+              },
+              {
+                "value_id": 9890,
+                "name": "13 tuổi"
+              },
+              {
+                "value_id": 9891,
+                "name": "14 tuổi"
+              },
+              {
+                "value_id": 9892,
+                "name": "15 tuổi"
+              },
+              {
+                "value_id": 9893,
+                "name": "16 tuổi"
+              },
+              {
+                "value_id": 9895,
+                "name": "2 tuổi"
+              },
+              {
+                "value_id": 9898,
+                "name": "3 tuổi"
+              },
+              {
+                "value_id": 9901,
+                "name": "4 tuổi"
+              },
+              {
+                "value_id": 9904,
+                "name": "5 tuổi"
+              },
+              {
+                "value_id": 9906,
+                "name": "6 tuổi"
+              },
+              {
+                "value_id": 9907,
+                "name": "7 tuổi"
+              },
+              {
+                "value_id": 9908,
+                "name": "8 tuổi"
+              },
+              {
+                "value_id": 9910,
+                "name": "9 tuổi"
+              }
+            ]
+          },
+          {
+            "group_id": "841350766059029",
+            "name": "Size (Quốc Tế)",
+            "value_list": [
+              {
+                "value_id": 6272,
+                "name": "Quốc Tế: Free Size"
+              },
+              {
+                "value_id": 9688,
+                "name": "INT: All Size Fit to L"
+              },
+              {
+                "value_id": 9689,
+                "name": "INT: All Size Fit to XL"
+              },
+              {
+                "value_id": 10300,
+                "name": "L"
+              },
+              {
+                "value_id": 10301,
+                "name": "M"
+              },
+              {
+                "value_id": 10302,
+                "name": "S"
+              },
+              {
+                "value_id": 10303,
+                "name": "XL"
+              },
+              {
+                "value_id": 10304,
+                "name": "XS"
+              },
+              {
+                "value_id": 10305,
+                "name": "XXL"
+              },
+              {
+                "value_id": 10306,
+                "name": "XXS"
+              },
+              {
+                "value_id": 10307,
+                "name": "XXXL"
+              },
+              {
+                "value_id": 10308,
+                "name": "XXXXL"
+              },
+              {
+                "value_id": 10309,
+                "name": "XXXXXL"
+              },
+              {
+                "value_id": 10310,
+                "name": "XXXXXXL"
+              },
+              {
+                "value_id": 10311,
+                "name": "XXXXXXXL"
+              }
+            ]
+          },
+          {
+            "group_id": "848820541542914",
+            "name": "Size (CO)"
+          },
+          {
+            "group_id": "873733937578496",
+            "name": "Size (cm)",
+            "value_list": [
+              {
+                "value_id": 9764,
+                "name": "100 cm"
+              },
+              {
+                "value_id": 9767,
+                "name": "110 cm"
+              },
+              {
+                "value_id": 9770,
+                "name": "120 cm"
+              },
+              {
+                "value_id": 9772,
+                "name": "130 cm"
+              },
+              {
+                "value_id": 9774,
+                "name": "140 cm"
+              },
+              {
+                "value_id": 9776,
+                "name": "150 cm"
+              },
+              {
+                "value_id": 9778,
+                "name": "160 cm"
+              },
+              {
+                "value_id": 9780,
+                "name": "170 cm"
+              },
+              {
+                "value_id": 9781,
+                "name": "175 cm"
+              },
+              {
+                "value_id": 9783,
+                "name": "180 cm"
+              },
+              {
+                "value_id": 9832,
+                "name": "70 cm"
+              },
+              {
+                "value_id": 9839,
+                "name": "80 cm"
+              },
+              {
+                "value_id": 9845,
+                "name": "90 cm"
+              },
+              {
+                "value_id": 9846,
+                "name": "95 cm"
+              }
+            ]
+          },
+          {
+            "group_id": "873733937674752",
+            "name": "Size (mm)",
+            "value_list": [
+              {
+                "value_id": 9848,
+                "name": "18 mm"
+              },
+              {
+                "value_id": 9849,
+                "name": "20 mm"
+              },
+              {
+                "value_id": 9850,
+                "name": "22 mm"
+              },
+              {
+                "value_id": 9851,
+                "name": "24 mm"
+              },
+              {
+                "value_id": 9852,
+                "name": "26 mm"
+              },
+              {
+                "value_id": 9853,
+                "name": "27 mm"
+              },
+              {
+                "value_id": 9854,
+                "name": "28 mm"
+              },
+              {
+                "value_id": 9855,
+                "name": "29 mm"
+              },
+              {
+                "value_id": 9856,
+                "name": "30 mm"
+              },
+              {
+                "value_id": 9857,
+                "name": "31 mm"
+              },
+              {
+                "value_id": 9858,
+                "name": "32 mm"
+              },
+              {
+                "value_id": 9859,
+                "name": "33 mm"
+              },
+              {
+                "value_id": 9860,
+                "name": "34 mm"
+              },
+              {
+                "value_id": 9861,
+                "name": "35 mm"
+              },
+              {
+                "value_id": 9862,
+                "name": "36 mm"
+              },
+              {
+                "value_id": 9863,
+                "name": "37 mm"
+              },
+              {
+                "value_id": 9864,
+                "name": "38 mm"
+              },
+              {
+                "value_id": 9865,
+                "name": "39 mm"
+              },
+              {
+                "value_id": 9866,
+                "name": "40 mm"
+              },
+              {
+                "value_id": 9867,
+                "name": "41 mm"
+              },
+              {
+                "value_id": 9868,
+                "name": "42 mm"
+              },
+              {
+                "value_id": 9869,
+                "name": "43 mm"
+              },
+              {
+                "value_id": 9870,
+                "name": "44 mm"
+              },
+              {
+                "value_id": 9871,
+                "name": "45 mm"
+              },
+              {
+                "value_id": 9872,
+                "name": "46 mm"
+              },
+              {
+                "value_id": 10330,
+                "name": "10 mm"
+              },
+              {
+                "value_id": 10331,
+                "name": "11 mm"
+              },
+              {
+                "value_id": 10332,
+                "name": "12 mm"
+              },
+              {
+                "value_id": 10333,
+                "name": "13 mm"
+              },
+              {
+                "value_id": 10334,
+                "name": "14 mm"
+              },
+              {
+                "value_id": 10335,
+                "name": "15 mm"
+              },
+              {
+                "value_id": 10336,
+                "name": "16 mm"
+              },
+              {
+                "value_id": 10337,
+                "name": "17 mm"
+              },
+              {
+                "value_id": 10338,
+                "name": "19 mm"
+              },
+              {
+                "value_id": 10339,
+                "name": "21 mm"
+              },
+              {
+                "value_id": 10340,
+                "name": "23 mm"
+              },
+              {
+                "value_id": 10341,
+                "name": "25 mm"
+              },
+              {
+                "value_id": 10343,
+                "name": "47 mm"
+              },
+              {
+                "value_id": 10344,
+                "name": "48 mm"
+              },
+              {
+                "value_id": 10345,
+                "name": "49 mm"
+              },
+              {
+                "value_id": 10346,
+                "name": "50 mm"
+              },
+              {
+                "value_id": 10347,
+                "name": "51 mm"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 101270,
+        "name": "Giới tính",
+        "is_default_fill": false,
+        "group_list": [
+          {
+            "group_id": "0",
+            "name": "",
+            "value_list": [
+              {
+                "value_id": 9929,
+                "name": "Bé trai"
+              },
+              {
+                "value_id": 10060,
+                "name": "Nữ"
+              },
+              {
+                "value_id": 10071,
+                "name": "Bé gái"
+              },
+              {
+                "value_id": 10156,
+                "name": "Nam"
+              },
+              {
+                "value_id": 10257,
+                "name": "Unisex"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

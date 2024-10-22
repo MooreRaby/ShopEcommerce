@@ -21,7 +21,7 @@ const dataProfiles = [
 
 class ProfileController {
     // admin
-    profiles = async (req, res, next) => {
+    profiles = async (req, res) => {
         new SuccessResponse({
             message: 'view all profiles',
             metadata: dataProfiles
@@ -29,7 +29,7 @@ class ProfileController {
     }
 
     //shop
-    profile = async (req, res, next) => {
+    profile = async (req, res) => {
         new SuccessResponse({
             message: 'view one profile',
             metadata: {

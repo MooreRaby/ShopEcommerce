@@ -40,8 +40,8 @@ class AccessController {
             { requestId: req.requestId },
             req.body
         )
-        const { code, ...result } = await AccessService.login(sendData)
-        if (code === 200) {
+        const { status, ...result } = await AccessService.login(sendData)
+        if (status === 200) {
             new SuccessResponse({
                 metadata: result
             }).send(res)

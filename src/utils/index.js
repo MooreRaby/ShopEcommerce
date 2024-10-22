@@ -5,8 +5,8 @@ const ObjectId = require('mongoose').Types.ObjectId
 
 const convertToObjectIdMongodb = id => new ObjectId(id)
 
-const getInfoData = ({ fileds = [], object = {} }) => {
-    return _.pick(object, fileds);
+const getInfoData = ({ fields = [], object = {} }) => {
+    return _.pick(object, fields);
 }
 
 const getSelectData = (select = []) => {

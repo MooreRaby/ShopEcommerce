@@ -2,7 +2,7 @@
 
 const express = require('express')
 const { asyncHandler } = require('../../helpers/asyncHandler')
-const { authenticationV2 } = require('../../auth/authUtils')
+
 const {
     newResource,
     newRole,

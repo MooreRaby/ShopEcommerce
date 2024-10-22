@@ -12,6 +12,7 @@ let client = {}, statusConnectRedis = {
     READY: 'ready'
 }, connectionTimeout
 
+
 const REDIS_CONNECT_TIMEOUT = 10000, REDIS_CONNECT_MESSAGE = {
     code: -99,
     message: {
@@ -24,7 +25,7 @@ const handleTimeoutError = () => {
     connectionTimeout = setTimeout(() => {
         throw new RedisErrorResponse({
             message: REDIS_CONNECT_MESSAGE.message.vn,
-            statusCode: REDIS_CONNECT_MESSAGE.code
+            status: REDIS_CONNECT_MESSAGE.code
         })
     }, REDIS_CONNECT_TIMEOUT)
 }
@@ -58,6 +59,7 @@ const handleEventConnection = (connectionRedis) => {
 
 const initRedis = async () => {
     const instanceRedis = redis.createClient();
+    // Store the client instance for later user
     client.instanceConnect = instanceRedis;
     handleEventConnection(instanceRedis);
 
@@ -88,5 +90,6 @@ const closeRedis = async () => {
 module.exports = {
     initRedis,
     getRedis,
-    closeRedis
+    closeRedis,
+   
 }

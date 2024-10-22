@@ -9,14 +9,21 @@ const COLLECTION_NAME = 'otp_logs'
 const shopSchema = new Schema({
     otp_token: { type: String, require: true },
     otp_email: { type: String, require: true },
-    otp_status: { type: String, default: 'pending', enum: [ 'pending', 'active', 'block' ] },
+    otp_status: {
+        type: String,
+        default: 'pending',
+        enum: [ 'pending', 'active', 'block' ]
+    },
     expireAt: {
-        type: Date, default: Date.now(), expires: 300
-    }
+        type: Date,
+        default: Date.now(),
+        expires: 300
+    },
+
 }, {
     timestamps: true,
     collection: COLLECTION_NAME
 });
- 
+
 //Export the model
 module.exports = model(DOCUMENT_NAME, shopSchema);
